@@ -11,7 +11,6 @@ const ELEMENT_DATA: Barcode[] = [
   {article: '1218654', barcode: '33333333333'},
   {article: '1235467', barcode: '44444444444'},
   {article: '1767899', barcode: '55555555555'},
-
 ];
 
 @Component({
@@ -29,7 +28,5 @@ export class BarcodesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.data;
   }
-
 }

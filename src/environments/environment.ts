@@ -7,6 +7,7 @@ export const environment = {
   apiUrlLog: 'http://192.168.77.251:90',
   // apiUrl: 'http://192.168.1.38:120',
   apiUrl:'http://192.168.77.251:90/',
+  apiUrlPayment:'http://192.168.7.194:330/',
   apiUrlImg: 'https://mile.by/gtools/getImg/index.php',
   cookieName: 'user-info-mile',
 };

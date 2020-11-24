@@ -1,0 +1,43 @@
+<div class="contant">
+    <div class="m-2">
+        <mat-form-field appearance="outline">
+            <mat-label>Артикул или штрихкод</mat-label>
+            <input matInput placeholder="Введите значение" (input)="onInputSearchData($event.target.value)" #data (keyup.enter)="onSearchOrder()">
+            <mat-icon id="close" matSuffix *ngIf="data.value.length > 0" (click)="onClearNumOrder(); data.value = ''">close</mat-icon>
+        </mat-form-field>
+        
+        <button class="bt-search m-2" mat-stroked-button [disabled]="!data.value" (click)="onSearchOrder()"> 
+            <mat-icon>search</mat-icon> 
+        </button>
+    </div>
+    
+    <mat-card>
+
+        <div class="row">
+            <div class="col">
+                <img src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <h2 class="name">{{product.name}}</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="description">{{product.info}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-100"></div>
+            <div class="col">
+                <h2 class="percent">-{{product.percent}}%</h2>
+            </div>
+            <div class="col">
+                <h2 class="percent"><u>{{product.price}}</u></h2>
+            </div>
+        </div>
+
+    </mat-card>
+
+</div>

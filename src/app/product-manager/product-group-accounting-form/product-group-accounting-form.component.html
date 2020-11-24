@@ -96,6 +96,7 @@
                             ЗПЦ
                         </mat-button-toggle>
                     </mat-button-toggle-group>
+                    <label class="lb-cost">Цена: 102020</label>
                 </div>
                 
             </div>
@@ -138,17 +139,20 @@
 
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef>  </th>
-                    <td mat-cell *matCellDef="let element"> 
-                        <mat-icon id="push" matTooltip="Распечатать этикетку" (click)="onPrintLable(element)">print</mat-icon>
-                        <mat-icon id="push" matTooltip="Добавить в выписку">add_circle_outline</mat-icon>
+                    <td mat-cell *matCellDef="let element; let i = index;"> 
+                        <ng-container *ngIf="hoveredIndex == i">
+                            <mat-icon id="push" matTooltip="Распечатать этикетку" (click)="onPrintLable(element)">print</mat-icon>
+                            <mat-icon id="push" matTooltip="Добавить в выписку" (click)="onAddInExcerpt(element)">add_circle_outline</mat-icon>
+                        </ng-container>
                     </td>
                 </ng-container>          
         
                 <tr mat-header-row *matHeaderRowDef="displayedColumnsProducts; sticky: true"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumnsProducts;" 
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsProducts; let i = index;"
+                    (mouseover)="hoveredIndex = i"
                     (click)="onSelectRowClick(row)"
+                    (dblclick)="onAddInExcerpt(row)"
                     [ngClass]="{ 'select-row': selectedRow[0] == row[0] }"></tr>
-
             </table>
         </div>
         <!-- mat-elevation-z8  mat-card-borderr-bottom-->
@@ -183,7 +187,7 @@
                     <app-product-pits></app-product-pits>
                 </mat-tab>
                 <mat-tab label="ЗПЦ"> 
-                    
+                    <app-zpc></app-zpc>
                 </mat-tab>
                 <mat-tab label="Склад"> 
                     

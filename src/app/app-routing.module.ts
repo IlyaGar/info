@@ -8,8 +8,11 @@ const routes: Routes = [
   { path: '', redirectTo: '/products', pathMatch: 'full' },
   { path: 'login', component: LoginPageComponent },
   { path: 'products', component: ProductGroupAccountingFormComponent },
-  // { path: 'order/:id', component: OrderComponent, data: { status : 'status' } },
-  { path: 'empty', component: EmptyFormComponent }
+  { path: 'empty', component: EmptyFormComponent },
+  { 
+    path: 'prices', 
+    loadChildren: () => import('./price-manager/price/price.module').then(m => m.PriceModule) 
+  },
 ];
 
 @NgModule({

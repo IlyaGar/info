@@ -43,6 +43,7 @@ export class ProductGroupAccountingFormComponent implements OnInit {
   selectedSearchVar: string = 'article';
   selectedModeVar: string;
 
+  hoveredIndex: any;
   valueModeVar: string;
 
   productPropAnswer: ProductPropAnswer = new ProductPropAnswer('', '', '', '', '', '', '', '');
@@ -242,6 +243,10 @@ export class ProductGroupAccountingFormComponent implements OnInit {
         console.log(error);
       });
     }
+  }
+
+  onAddInExcerpt(row: Array<string>) {
+    row;
   }
 
   onScroll(event) {

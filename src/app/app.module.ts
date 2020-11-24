@@ -36,6 +36,7 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FOR
 import { DischargePrintComponent } from './product-manager/print-forms/discharge-print/discharge-print.component';
 import { PricesComponent } from './product-manager/components/prices/prices.component';
 import { ProductPitsComponent } from './product-manager/components/product-pits/product-pits.component';
+import { ZpcComponent } from './product-manager/components/zpc/zpc.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { ProductPitsComponent } from './product-manager/components/product-pits/
     DischargePrintComponent,
     PricesComponent,
     ProductPitsComponent,
+    ZpcComponent,
   ],
   imports: [
     AppRoutingModule,
