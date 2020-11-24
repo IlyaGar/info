@@ -8,5 +8,6 @@ export class CheckAnswer{
         public mesname: string,
         public info: string,
         public itog: string,
+        public img: string,
     ){}
 }

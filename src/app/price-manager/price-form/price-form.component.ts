@@ -16,7 +16,7 @@ export class PriceFormComponent implements OnInit {
   article: string = '';
   barcode: string = '';
   searchData: CheckModel = new CheckModel('', '', '', '');
-  product: CheckAnswer = new CheckAnswer('', '', '', '', '', '', '', '');
+  product: CheckAnswer = new CheckAnswer('', '', '', '', '', '', '', '', '');
 
   messageNoConnect = 'Нет соединения, попробуйте позже.';
   action = 'Ok';
