@@ -40,7 +40,7 @@ export class LoginPageComponent implements OnInit {
       if(this.checkResponse(response)) {
         this.tokenService.setCookie(response);
         this.tokenService.logEvent(true);
-        this.router.navigate(['/products']);
+        this.router.navigate(['/prices']);
       }
       else 
         this.snackbarService.openSnackBar(this.messageFailLogin, this.action, this.styleNoConnect);
