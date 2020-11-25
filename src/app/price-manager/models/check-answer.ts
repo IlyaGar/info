@@ -6,7 +6,7 @@ export class CheckAnswer{
         public price: string,
         public percent: string,
         public mesname: string,
-        public info: string,
+        public info: boolean,
         public itog: string,
         public img: string,
     ){}

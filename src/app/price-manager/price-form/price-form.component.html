@@ -1,22 +1,33 @@
 <div class="contant">
-    <div class="m-2">
+
+    <div class="search-panel row">
+
+        <mat-form-field appearance="outline" class="search-store m-2">
+            <mat-label>Магазин</mat-label>
+            <mat-select [(ngModel)]="selectedStore" name="store" (ngModelChange)="onChange($event)">
+                <mat-option *ngFor="let store of stores" [(value)]="store.id">{{store.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Артикул или штрихкод</mat-label>
-            <input matInput placeholder="Введите значение" (input)="onInputSearchData($event.target.value)" #data (keyup.enter)="onSearchOrder()">
+            <input type="number" step="1" min="0" matInput placeholder="Введите значение" (input)="onInputSearchData($event.target.value)" #data (keyup.enter)="onSearchOrder()">
             <mat-icon id="close" matSuffix *ngIf="data.value.length > 0" (click)="onClearNumOrder(); data.value = ''">close</mat-icon>
+            <mat-hint>Введите не менее 6 цифр!</mat-hint>
         </mat-form-field>
         
-        <button class="bt-search m-2" mat-stroked-button [disabled]="!data.value" (click)="onSearchOrder()"> 
+        <button class="bt-search m-2" mat-stroked-button [disabled]="!isBtSearchActive" (click)="onSearchOrder()"> 
             <mat-icon>search</mat-icon> 
         </button>
+        
     </div>
-    
+
     <mat-card *ngIf="product.article">
 
         <div class="row">
             <div class="col">
-                <img *ngIf="product.img" src="{{product.img}}">
-                <img *ngIf="!product.img" src="{{../../../../../assets/no_photo.png">
+                <img *ngIf="product.img" src="{{product.img | urlImg}}">
+                <img *ngIf="!product.img" src="../../../../../assets/no_photo.png">
             </div>
             <div class="col">
                 <div class="row">
@@ -24,18 +35,28 @@
                         <h2 class="name">{{product.name}}</h2>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <p class="description">{{product.info}}</p>
-                    </div>
-                </div>
             </div>
             <div class="w-100"></div>
             <div class="col">
-                <h2 class="percent" *ngIf="product.percent">-{{product.percent}}%</h2>
+                <div class="row">
+                    <h2 class="percent" *ngIf="product.percent">{{product.percent}}</h2>
+                </div>
+                <div class="row">
+                    <h2 class="quantity" *ngIf="product.quantity">Доступное количество: {{product.quantity}}</h2>
+                </div>
+                <div class="row">
+                    <h2 class="import-text">Собственный импорт Астомстрой:&nbsp;</h2>
+                    <h2 class="info-yes" *ngIf="product.info">да</h2>
+                    <h2 class="info-no" *ngIf="!product.info">нет</h2>
+                </div>
             </div>
             <div class="col">
-                <h2 class="percent"><u>{{product.price}}</u></h2>
+                <div class="row">
+                    <h2 class="percent"><u>{{product.itog | mathStr | number:'1.0-2'}} за {{product.mesname}}</u></h2>
+                </div> 
+                <div class="row">
+                    <h2 class="old">Без скидки: {{product.price}}</h2>
+                </div>
             </div>
         </div>
 

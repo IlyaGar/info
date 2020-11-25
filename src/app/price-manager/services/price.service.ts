@@ -8,13 +8,13 @@ import { CheckAnswer } from '../models/check-answer';
 @Injectable({
   providedIn: 'root'
 })
-export class PriceService {
+export class PriceService {ы
 
   private urlPice = environment.apiUrlPayment + "check/price/";
   
   constructor(private http: HttpClient) { }
 
-  getProduct(data: CheckModel): Observable<CheckAnswer> {
-    return this.http.post<CheckAnswer>(`${this.urlPice}`, data);
+  getProduct(data: CheckModel): Observable<any> { // CheckAnswer
+    return this.http.post<any>(`${this.urlPice}`, data);
   }
 }

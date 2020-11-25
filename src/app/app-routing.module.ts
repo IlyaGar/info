@@ -5,7 +5,8 @@ import { EmptyFormComponent } from './common/components/empty-form/empty-form.co
 import { ProductGroupAccountingFormComponent } from './product-manager/product-group-accounting-form/product-group-accounting-form.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/products', pathMatch: 'full' },
+  // { path: '', redirectTo: '/products', pathMatch: 'full' },
+  { path: '', redirectTo: '/prices', pathMatch: 'full' },
   { path: 'login', component: LoginPageComponent },
   { path: 'products', component: ProductGroupAccountingFormComponent },
   { path: 'empty', component: EmptyFormComponent },
