@@ -67,24 +67,28 @@ export class PriceFormComponent implements OnInit {
   }
   
   onSearchOrder() {
-    if(this.searchString.length >= 6) {
-      
-      if(this.searchString.length > 7)
-        this.barcode = this.searchString;
-      if(this.searchString.length === 6 || this.searchString.length === 7)
-        this.article = this.searchString; 
-      this.priceService.getProduct(new CheckModel(this.token, this.article, this.barcode, this.selectedStore)).subscribe(response => {
-        if(response.status === 'not action')
-          this.snackbarService.openSnackBar('Данного артикула или штрихкода нет.', this.action, this.styleNoConnect); 
-        else if(response.status === 'not found')
-            this.snackbarService.openSnackBar('На данный товар акции нет.', this.action, this.styleNoConnect); 
-          else this.product = response;
-      }, 
-      error => { 
-        console.log(error);
-        this.snackbarService.openSnackBar(this.messageNoConnect, this.action, this.styleNoConnect);
-      }); 
-    } 
+    if(this.selectedStore) {
+      if(this.searchString.length >= 6) {    
+        if(this.searchString.length > 7)
+          this.barcode = this.searchString;
+        if(this.searchString.length === 6 || this.searchString.length === 7)
+          this.article = this.searchString; 
+        this.priceService.getProduct(new CheckModel(this.token, this.article, this.barcode, this.selectedStore)).subscribe(response => {
+          if(response.status === 'not action')
+            this.snackbarService.openSnackBar('Данного артикула или штрихкода нет.', this.action, this.styleNoConnect); 
+          else if(response.status === 'not found')
+              this.snackbarService.openSnackBar('На данный товар акции нет.', this.action, this.styleNoConnect); 
+            else this.product = response;
+        }, 
+        error => { 
+          console.log(error);
+          this.snackbarService.openSnackBar(this.messageNoConnect, this.action, this.styleNoConnect);
+        }); 
+      } 
+    } else {
+      this.snackbarService.openSnackBar('Выберите магазин', this.action);
+    }
+
   }
 
   onClearNumOrder() {
