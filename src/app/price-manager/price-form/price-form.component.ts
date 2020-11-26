@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CheckModel } from '../models/check-model';
 import { CheckAnswer } from '../models/check-answer';
 import { PriceService } from '../services/price.service';
 import { SnackbarService } from 'src/app/common/services/snackbar/snackbar.service';
+import { MatInput } from '@angular/material/input';
 
 interface Store {
   id: string,
@@ -43,6 +44,8 @@ export class PriceFormComponent implements OnInit {
   stores: Array<Store> = ELEMENT_DATA;
   isBtSearchActive = false;
 
+  @ViewChild("inputSearch") inputSearch: MatInput;
+
   messageNoConnect = 'Нет соединения, попробуйте позже.';
   action = 'Ok';
   styleNoConnect = 'red-snackbar';
@@ -54,6 +57,10 @@ export class PriceFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedStore = localStorage.getItem('selectedStore');
+  }
+
+  ngAfterViewInit() {
+    this.inputSearch.focus();
   }
 
   onInputSearchData($event: string) {

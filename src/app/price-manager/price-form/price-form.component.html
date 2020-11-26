@@ -11,7 +11,9 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Артикул или штрихкод</mat-label>
-            <input type="number" step="1" min="0" matInput placeholder="Введите значение" (input)="onInputSearchData($event.target.value)" #data (keyup.enter)="onSearchOrder()">
+            <input type="number" step="1" min="0" matInput class="input-search"  #inputSearch="matInput" placeholder="Введите значение" 
+                (input)="onInputSearchData($event.target.value)" 
+                #data (keyup.enter)="onSearchOrder()">
             <mat-icon id="close" matSuffix *ngIf="data.value.length > 0" (click)="onClearNumOrder(); data.value = ''">close</mat-icon>
             <mat-hint>Введите не менее 6 цифр!</mat-hint>
         </mat-form-field>
