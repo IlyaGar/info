@@ -37,6 +37,7 @@ import { DischargePrintComponent } from './product-manager/print-forms/discharge
 import { PricesComponent } from './product-manager/components/prices/prices.component';
 import { ProductPitsComponent } from './product-manager/components/product-pits/product-pits.component';
 import { ZpcComponent } from './product-manager/components/zpc/zpc.component';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { MathStrPipe } from './pipes/math-str.pipe';
 import { UrlImgPipe } from './pipes/url-img.pipe';
 
@@ -81,6 +82,9 @@ import { UrlImgPipe } from './pipes/url-img.pipe';
     MatDatepickerModule,
     NgxPrintModule,
     NgScrollbarModule,
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger', 
+    }),
   ],
   exports: [AngularMaterialModule],
   providers: [    

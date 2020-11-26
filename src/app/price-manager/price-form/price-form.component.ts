@@ -1,9 +1,18 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CheckModel } from '../models/check-model';
 import { CheckAnswer } from '../models/check-answer';
 import { PriceService } from '../services/price.service';
 import { SnackbarService } from 'src/app/common/services/snackbar/snackbar.service';
 import { MatInput } from '@angular/material/input';
+import { MatDialog } from '@angular/material/dialog';
+import { SelectCountComponent } from '../dialog-windows/select-count/select-count.component';
+import { AddToVipiska } from '../models/add-to-vipiska';
+import { TokenService } from 'src/app/common/services/token/token.service';
+import { VipiskaQuery } from '../models/vipiska-query';
+import { VipiskaEnd } from '../models/vipiska-end';
+import { Vipiska } from '../models/vipiska';
+import { VipiskaDelete } from '../models/vipiska-delete';
+import { VipiskaEdit } from '../models/vipiska-edit';
 
 interface Store {
   id: string,
@@ -45,22 +54,41 @@ export class PriceFormComponent implements OnInit {
   isBtSearchActive = false;
 
   @ViewChild("inputSearch") inputSearch: MatInput;
+  listVipiska: VipiskaEnd = new VipiskaEnd([new Vipiska('','', '', '','', '','', '','',  false) ], '');
+  cancelClicked = false;
+  displayedColumnsPrint = ['name', 'quantity', 'mesname', 'price', 'summa', 'barcode'];
+  imgSource = 'https://barcode.tec-it.com/barcode.ashx?data=';
 
   messageNoConnect = 'Нет соединения, попробуйте позже.';
   action = 'Ok';
   styleNoConnect = 'red-snackbar';
 
   constructor(
+    public dialog: MatDialog,
+    private tokenService: TokenService,
     private priceService: PriceService,
     private snackbarService: SnackbarService,
   ) { }
 
   ngOnInit(): void {
     this.selectedStore = localStorage.getItem('selectedStore');
+    this.getListVipiska();
   }
 
   ngAfterViewInit() {
     this.inputSearch.focus();
+  }
+
+  getListVipiska() {
+    this.priceService.getListVipiska(new VipiskaQuery(this.tokenService.getToken())).subscribe(response => {
+      if(response) {
+        this.listVipiska = response;
+      }
+    }, 
+    error => { 
+      console.log(error);
+      this.snackbarService.openSnackBar(this.messageNoConnect, this.action, this.styleNoConnect);
+    }); 
   }
 
   onInputSearchData($event: string) {
@@ -95,5 +123,76 @@ export class PriceFormComponent implements OnInit {
     } else {
       this.snackbarService.openSnackBar('Выберите магазин', this.action);
     }
+  }
+
+  onAddProduct(product: CheckAnswer) {
+    const dialogRef = this.dialog.open(SelectCountComponent, {
+      width: "300px",
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        let addToVipiska = new AddToVipiska(this.tokenService.getToken(), product.article, this.selectedStore, result);
+        this.priceService.addToVipiska(addToVipiska).subscribe(response => {
+          if(response.status.toLocaleLowerCase() === 'ok') {
+            this.snackbarService.openSnackBar('Товар добавлен в выписку.', this.action);
+            this.getListVipiska();
+          }
+        }, 
+        error => { 
+          console.log(error);
+          this.snackbarService.openSnackBar(this.messageNoConnect, this.action, this.styleNoConnect);
+        }); 
+      }
+    });
+  }
+
+  onClearList() {
+    this.priceService.clearList(new VipiskaQuery(this.tokenService.getToken())).subscribe(response => {
+      if(response.status.toLocaleLowerCase() === 'ok') {
+        this.snackbarService.openSnackBar('Выписка очищена.', this.action);
+        this.getListVipiska();
+      }
+    }, 
+    error => { 
+      console.log(error);
+      this.snackbarService.openSnackBar(this.messageNoConnect, this.action, this.styleNoConnect);
+    });
+  }
+
+  onCancel() {
+  }
+
+  onDeleteItem(vipiska: Vipiska) {
+    this.priceService.deleteItem(new VipiskaDelete(this.tokenService.getToken(), vipiska.id)).subscribe(response => {
+      if(response.status.toLocaleLowerCase() === 'ok') {
+        this.snackbarService.openSnackBar('Позиция удалена.', this.action);
+        this.getListVipiska();
+      }
+    }, 
+    error => { 
+      console.log(error);
+      this.snackbarService.openSnackBar(this.messageNoConnect, this.action, this.styleNoConnect);
+    });
+  }
+
+  onEditItem(vipiska: Vipiska) {
+    const dialogRef = this.dialog.open(SelectCountComponent, {
+      width: "300px",
+      data: { count: vipiska.quantity },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.priceService.editItem(new VipiskaEdit(this.tokenService.getToken(), vipiska.id, result)).subscribe(response => {
+          if(response.status.toLocaleLowerCase() === 'ok') {
+            this.snackbarService.openSnackBar('Количество изменено.', this.action);
+            this.getListVipiska();
+          }
+        }, 
+        error => { 
+          console.log(error);
+          this.snackbarService.openSnackBar(this.messageNoConnect, this.action, this.styleNoConnect);
+        }); 
+      }
+    });
   }
 }
