@@ -38,6 +38,12 @@
                                         (cancel)="cancelClicked = true; onCancel()">
                                         <mat-icon>delete</mat-icon>
                                     </button> -->
+
+                                    <button
+                                        class="bt-card-item-del"
+                                        mat-icon-button>
+                                        <mat-icon matTooltip="Удалить позицию" (click)="onDeleteItem(vipiska)">delete</mat-icon>
+                                    </button>
                                    
                                     <button
                                         class="bt-card-item-del"
