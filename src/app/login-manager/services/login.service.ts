@@ -12,8 +12,8 @@ import { LogoutStatus } from '../models/logout-status';
 })
 export class LoginService {
 
-  private urlLogin = environment.apiUrlLog + '/auth/?data';
-  private urlLogout = environment.apiUrlLog + '/logout/';
+  private urlLogin = environment.apiUrlPayment + '/auth/?data';
+  private urlLogout = environment.apiUrlPayment + '/logout/';
 
   constructor(private http: HttpClient) { }
   

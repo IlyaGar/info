@@ -8,7 +8,7 @@ import { CheckAnswer } from '../models/check-answer';
 @Injectable({
   providedIn: 'root'
 })
-export class PriceService {ы
+export class PriceService {
 
   private urlPice = environment.apiUrlPayment + "check/price/";
   

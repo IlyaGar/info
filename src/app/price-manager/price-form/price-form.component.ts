@@ -95,9 +95,5 @@ export class PriceFormComponent implements OnInit {
     } else {
       this.snackbarService.openSnackBar('Выберите магазин', this.action);
     }
-
-  }
-
-  onClearNumOrder() {
   }
 }
