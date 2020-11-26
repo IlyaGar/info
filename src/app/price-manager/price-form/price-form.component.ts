@@ -115,7 +115,7 @@ export class PriceFormComponent implements OnInit {
               this.snackbarService.openSnackBar('На данный товар акции нет.', this.action, this.styleNoConnect); 
             else {
               this.product = response;
-              
+              this.inputSearch.value = '';
             }
         }, 
         error => { 
