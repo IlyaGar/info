@@ -42,7 +42,7 @@ export class PriceService {
   }
 
   deleteItem(data: VipiskaDelete): Observable<Status> {
-    return this.http.post<Status>(`${this.urlEdit}`, data);
+    return this.http.post<Status>(`${this.urlDelete}`, data);
   }
 
   editItem(data: VipiskaEdit): Observable<Status> {

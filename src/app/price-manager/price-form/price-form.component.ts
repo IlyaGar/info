@@ -113,7 +113,10 @@ export class PriceFormComponent implements OnInit {
             this.snackbarService.openSnackBar('Данного артикула или штрихкода нет.', this.action, this.styleNoConnect); 
           else if(response.status === 'not found')
               this.snackbarService.openSnackBar('На данный товар акции нет.', this.action, this.styleNoConnect); 
-            else this.product = response;
+            else {
+              this.product = response;
+              
+            }
         }, 
         error => { 
           console.log(error);
