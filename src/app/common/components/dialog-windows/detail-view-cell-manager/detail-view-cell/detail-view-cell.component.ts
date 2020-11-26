@@ -1,5 +1,4 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { StillageItem } from 'src/app/wms-map/models/stillage-item';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface DialogData {
@@ -16,7 +15,7 @@ export interface DialogData {
 })
 export class DetailViewCellComponent implements OnInit {
 
-  stillageItem: StillageItem;
+  stillageItem: any;
 
   constructor(
     public dialogRef: MatDialogRef<DetailViewCellComponent>,

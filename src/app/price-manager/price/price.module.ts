@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MathStrPipe } from 'src/app/pipes/math-str.pipe';
 import { UrlImgPipe } from 'src/app/pipes/url-img.pipe';
 import { SelectCountComponent } from '../dialog-windows/select-count/select-count.component';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+// import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { NgxPrintModule } from 'ngx-print';
 
 @NgModule({
@@ -24,9 +24,9 @@ import { NgxPrintModule } from 'ngx-print';
     NgxPrintModule,
     PriceRoutingModule,
     AngularMaterialModule,
-    ConfirmationPopoverModule.forRoot({
-      confirmButtonType: 'danger', 
-    }),
+    // ConfirmationPopoverModule.forRoot({
+    //   confirmButtonType: 'danger', 
+    // }),
   ],
   exports: [AngularMaterialModule],
 })

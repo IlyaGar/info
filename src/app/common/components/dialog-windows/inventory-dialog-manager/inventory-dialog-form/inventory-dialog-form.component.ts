@@ -1,11 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { StillageItem } from 'src/app/wms-map/models/stillage-item';
-import { InventoryItem } from 'src/app/wms-map/models/inventory-item';
-
-export interface DialogData {
-  list: Array<InventoryItem>;
-}
 
 @Component({
   selector: 'app-inventory-dialog-form',
@@ -18,7 +12,7 @@ export class InventoryDialogFormComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<InventoryDialogFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   ngOnInit() {
