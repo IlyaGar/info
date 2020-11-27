@@ -6,7 +6,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class MathStrPipe implements PipeTransform {
 
   transform(value: string): number {
-    let t = parseFloat(value.replace(',', '.'));
+    let t = 0;
+    if(value) {
+      t = parseFloat(value.replace(',', '.'));
+    }
     return t;
   }
 }
