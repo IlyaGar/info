@@ -131,7 +131,8 @@
                     </div>
                     <div class="col">
                         <div class="row">
-                            <h2 class="percent"><u>{{product.itog | mathStr | number:'1.0-2'}} за {{product.mesname}}</u></h2>
+                            <h2 class="percent" *ngIf="product.itog"><u>{{product.itog | mathStr | number:'1.0-2'}} за {{product.mesname}}</u></h2>
+                            <h2 class="percent" *ngIf="!product.itog">Нет скидки</h2>
                         </div> 
                         <div class="row">
                             <h2 class="old">Без скидки: {{product.price}}</h2>
